@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package p2p;
+
+message LemmatizerRequest {
+    string text = 1;
+}
+
+message LemmatizedWord {
+    string sentence = 1;
+    string word = 2;
+    int32 id = 3;
+}
+
+message LemmatizerResponse {
+    repeated LemmatizedWord words = 1;
+}
+
+service Lemmatizers {
+    rpc Lemmatize (LemmatizerRequest) returns (LemmatizerResponse);
+}

@@ -1,0 +1,80 @@
+{{define "title"}}Поиск{{end}}
+{{define "content"}}
+<div class="container-fluid">
+    <div class="row">
+    <div class="col-lg-3 col-xl-3"></div>
+    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+        <div class="card" style="margin-top: 2em;">
+            <h4 class="card-header text-center">
+                Поиск слова:
+            </h4>
+            <div class="card-body">
+                <form class="input-group">
+                    <input id="search_input" placeholder="Введите слово:" class="form-control" />
+                    <button type="button" id="search_button" class="btn btn-primary search_button" style="width: 15%;">Поиск</button>
+                </form>
+                <div style="margin-top: 1em;">
+                    <span>* Принимаются только слова в начальной форме.</span>
+                </div>
+            </div>
+        </div>
+        <div id="result" class="card" style="margin-top: 2em;">
+            <h4 class="card-header text-center">
+                Результат:
+            </h4>
+            <div class="card-body">
+                <ul id="body_sentences">
+
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-xl-3"></div>
+    </div>
+</div>
+<script>
+    document.addEventListener("DOMContentLoaded", function(event) {
+        let result = document.getElementById("result");
+        result.style.display = "none";
+        function get_sentences(){
+        fetch("/search", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                'word': document.getElementById("search_input").value,
+            })
+        }).then((response) => {
+            if (response.ok) {
+                return response.json();
+            }
+        }).then((search_result) => {
+            let body_sentences = document.getElementById("body_sentences");
+            body_sentences.innerHTML = "";
+            result.style.display = "block";
+            if (search_result.sentences == null) {
+                body_sentences.insertAdjacentHTML('afterbegin', '<span style="margin: 1em;" class="text-center">Ничего не найдено!</span>')
+            } else {
+                search_result.sentences.forEach(sentence => body_sentences.insertAdjacentHTML('afterbegin', '<li>' + sentence + '</li>'));
+            }
+        }).catch((error) => console.log(error))
+    };
+    search_button.onclick = get_sentences;
+    let input = document.getElementById("search_input");
+    input.addEventListener("keypress", function(event) {
+        if (event.which == 13) {
+            event.preventDefault();
+            get_sentences();
+        }
+    });
+
+    input.addEventListener("keyup", function(event) {
+        if (event.which == 13) {
+            event.preventDefault();
+            get_sentences();
+        }
+    });
+});
+</script>
+{{end}}

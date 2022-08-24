@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+package p2p;
+
+option go_package = "./pkg/server/pb";
+
+message SearchSentencesRequest {
+    string word = 1;
+}
+
+message SearchSentencesResponse {
+    repeated string sentences = 1;
+}
+
+message CreateBookRequest {
+    bytes text = 1;
+    string name = 2;
+}
+
+message CreateBookResponse {
+    bool ok = 1;
+}
+
+message Book {
+    string name = 1;
+    int32 charactersCount = 2;
+    int32 wordsCount = 3;
+}
+
+message GetBooksInformationRequest {}
+message GetBooksInformationResponse {
+    repeated Book books = 1;
+    int32 number = 2;
+}
+
+service HTTP {
+    rpc SearchSentences(SearchSentencesRequest) returns (SearchSentencesResponse);
+    rpc CreateBook (CreateBookRequest) returns (CreateBookResponse);
+    rpc GetBooksInformation (GetBooksInformationRequest) returns (GetBooksInformationResponse);
+}

@@ -1,0 +1,47 @@
+{{define "title"}}Главная{{end}}
+{{define "content"}}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-3 col-xl-3"></div>
+            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                <div class="card" style="margin-top: 2em;">
+                    <h4 class="card-header text-center">
+                        Добавить текст
+                    </h4>
+                    <div class="card-body">
+                        <form method="POST" class="input-group" action="/" enctype="multipart/form-data">
+                            <input type="file" name="file" required class="form-control" />
+                            <button class="btn btn-primary" type="submit">Отправить</button>
+                        </form>
+                        <div style="margin-top: 1em;">
+                            <span>* Только файлы с форматом ".txt".</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card" style="margin-top: 2em;">
+                    <h4 class="card-header text-center">
+                        Мои тексты ({{.Number}}):
+                    </h4>
+                    {{if .Books}}
+                    {{range .Books}}
+                    <div class="card-body">
+                        <div class="border rounded" style="padding: 1em;">
+                            <h5 class="text-center">Название: {{.Name}}</h5>
+                            <div class="row" style="padding: 1em;">
+                                <span class="col-3">Количество символов:</span>
+                                <span class="col-9">{{.CharactersCount}}</span>
+                                <span class="col-3">Количество слов:</span>
+                                <span class="col-9">{{.WordsCount}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    {{end}}
+                    {{else}}
+                    <span style="margin: 1em;" class="text-center">У вас нет загруженных книг.</span>
+                    {{end}}
+                </div>
+            </div>
+            <div class="col-lg-3 col-xl-3"></div>
+        </div>
+    </div>    
+{{end}}
