@@ -5,7 +5,7 @@ on:
       - .github/workflows/network-tests.yml
       - network/**
 
-permissions: read-all|write-all
+permissions: write-all
 
 defaults:
   run:
