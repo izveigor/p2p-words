@@ -35,4 +35,4 @@ jobs:
             ${{ runner.OS }}-
 
       - name: Run tests
-        run: make test
+        run: sudo make test
