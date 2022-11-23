@@ -21,9 +21,6 @@ jobs:
         with:
           go-version: 1.18
 
-      - name: Set permission
-        run: sudo chmod -R 777 .
-
       - name: Verify dependencies
         run: go mod verify
 
