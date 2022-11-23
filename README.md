@@ -1,4 +1,4 @@
-# P2P words [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/izveigor/p2p-words/blob/main/LICENSE) 
+# P2P words [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/izveigor/p2p-words/blob/main/LICENSE) ![Http tests](https://github.com/izveigor/p2p-words/actions/workflows/http-tests.yml/badge.svg)
 
 Одноранговая сеть для поиска слов.
 ![1](https://user-images.githubusercontent.com/68601180/186383274-18883d3e-f83f-4244-a182-278553537795.png)
