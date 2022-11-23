@@ -1,16 +1,16 @@
-name: http-tests
+name: network-tests
 on:
   push:
     paths:
-      - .github/workflows/http-tests.yml
-      - http/**
+      - .github/workflows/network-tests.yml
+      - network/**
 
 defaults:
   run:
-    working-directory: ./http
+    working-directory: ./network
 
 jobs:
-  http-tests:
+  network-tests:
     runs-on: [ubuntu-latest]
     steps:
       - name: Checkout
